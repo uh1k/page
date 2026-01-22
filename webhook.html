@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta property="og:title" content="PRC-148(WEBHOOK送信機)">
+        <meta property="og:description" content="非同期版 Made by uh1k">
+        <meta property="og:image" content="https://cdn.discordapp.com/attachments/1455422381072846891/1463574808133374146/pack_icon.png?ex=697253c2&is=69710242&hm=da970584028f5388ae8ef4f9e3c8b7c9762715f4f5079f1f79134ec1ea51e748&">
+        <title>PRC-148</title>
+    </head>
+    <body>
+        <style>
+            html {
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                color: white;
+                background: #1b1d22;
+            }
+            input, textarea, button{
+                font-size: 2rem;
+                padding: 1rem 2rem ;
+                margin: 0.2rem;
+                border-radius: 8px;
+            }
+            textarea {
+                width:90%;
+                height: 6em;
+                resize: vertical;
+            }
+        </style>
+        <main>
+            <form id="webhook">
+                <textarea type="text" placeholder="送信するメッセージ" id="TextContent"></textarea>
+                <input type="text" placeholder="送信するWebHookのurl" id="url">
+                <input type="text" placeholder="送信する回数(1〜7)" id="num">
+                <button id="submit">submit request</button>
+            </form>
+            <script>
+                document.getElementById('webhook').addEventListener('submit', e => {
+                    e.preventDefault();
+                    const TextContent = document.getElementById('TextContent').value;
+                    const url = document.getElementById('url').value;
+                    let num = Number(document.getElementById('num').value);
+                    async function execute () {
+
+                        while (num > 0){
+                            await new Promise(resolve => setTimeout(resolve, 350));
+                            await fetch(url, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json"},
+                            body: JSON.stringify({ content: TextContent})
+                        })
+                    
+                        num--;
+                    }
+                    }
+                    execute();
+                })
+            </script>
+        </main>
+    </body>
+</html>
