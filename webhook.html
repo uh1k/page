@@ -42,7 +42,7 @@
                     async function execute () {
 
                         while (num > 0){
-                            await new Promise(resolve => setTimeout(resolve, 99));
+                            await new Promise(resolve => setTimeout(resolve, 9));
                             await fetch(url, {
                             method: "POST",
                             headers: { "Content-Type": "application/json"},
