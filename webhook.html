@@ -30,7 +30,7 @@
             <form id="webhook">
                 <textarea type="text" placeholder="送信するメッセージ" id="TextContent"></textarea>
                 <input type="text" placeholder="送信するWebHookのurl" id="url">
-                <input type="text" placeholder="送信する回数(1〜7)" id="num">
+                <input type="text" placeholder="送信する回数(実際はこれより少なくなる)" id="num">
                 <button id="submit">submit request</button>
             </form>
             <script>
@@ -42,7 +42,7 @@
                     async function execute () {
 
                         while (num > 0){
-                            await new Promise(resolve => setTimeout(resolve, 350));
+                            await new Promise(resolve => setTimeout(resolve, 99));
                             await fetch(url, {
                             method: "POST",
                             headers: { "Content-Type": "application/json"},
