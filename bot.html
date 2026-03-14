@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta property="og:description" content="Post message">
+        <title>/</title>
+    </head>
+    <style>
+        html {
+            background: #333;
+        }
+    </style>
+    <body>
+        <form id="form1">
+            <input id="token" placeholder="Enter your token">
+            <input id="channel" placeholder="Type channel id">
+            <textarea id="message" placeholder="Type text content"></textarea>
+            <button id="submit">submit</button>
+        </form>
+        <script>
+            document.getElementById('form1').addEventListener('submit', async e => {
+                e.preventDefault();
+
+                let token = document.getElementById('token').value;
+                let channel = document.getElementById('channel').value;
+                let message = document.getElementById('message').value;
+                await fetch(`https://discord.com/api/v9/channels/${channel}/messages`,{
+                    method: "POST",
+                    headers: { "Content-Type":"application/json", "Authorization": `Bot ${token}` },
+                    body: JSON.stringify( { content: message } )
+
+                }
+                )
+                await new Promise(resolve => setTimeout(resolve, 750))
+
+                document.getElementById('message').value = '';
+            })
+        </script>
+    </body>
+</html>
